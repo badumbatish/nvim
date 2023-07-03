@@ -23,5 +23,16 @@ keymap("n", "<S-l>", ":tabnext<CR>", opts)
 keymap("n", "<S-h>", ":tabprevious<CR>", opts)
 
 keymap("n", "<leader>q", ":q<CR>", opts)
-keymap("n", "<leader>t", ":tabnew + term<CR>", opts)
+
+
+local open_or_move_to_tab = function()
+    local term = "terminal"
+    if vim.fn.bufexists(term) then
+        vim.cmd(":drop " .. term)
+    else
+        vim.cmd(":tabnew + " .. term .. "<CR>")
+    end
+end
+
+keymap("n", "<leader>t", open_or_move_to_tab, opts)
 vim.cmd("tnoremap <esc> <C-\\><C-N>")
