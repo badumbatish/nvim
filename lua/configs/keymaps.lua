@@ -23,4 +23,5 @@ keymap("n", "<S-l>", ":tabnext<CR>", opts)
 keymap("n", "<S-h>", ":tabprevious<CR>", opts)
 
 keymap("n", "<leader>q", ":q<CR>", opts)
-
+keymap("n", "<leader>t", ":tabnew + term<CR>", opts)
+vim.cmd("tnoremap <esc> <C-\\><C-N>")

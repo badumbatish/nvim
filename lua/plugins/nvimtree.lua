@@ -27,6 +27,10 @@ return {
     vim.keymap.set('n', '<CR>', api.node.open.tab, opts('Open in new tab'))
 end
     require("nvim-tree").setup {
+        view = { 
+            relativenumber = true,
+            number = true
+        },
         on_attach = my_on_attach
   }
 
