@@ -35,7 +35,8 @@ lsp.ensure_installed({
     'pyright',
     -- Replace these with whatever servers you want to install
     'tsserver',
-    'eslint'
+    'eslint',
+    'clangd'
 })
 
 lsp.on_attach(function(client, bufnr)

@@ -27,10 +27,11 @@ keymap("n", "<leader>q", ":q<CR>", opts)
 
 local open_or_move_to_tab = function()
     local term = "terminal"
-    if vim.fn.bufexists(term) then
-        vim.cmd(":drop " .. term)
+    if vim.fn.bufexists(term) == 1 then
+        vim.cmd("drop " .. term)
     else
-        vim.cmd(":tabnew + " .. term .. "<CR>")
+        vim.cmd("tabnew | terminal")
+        vim.cmd("file terminal")
     end
 end
 
