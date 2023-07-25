@@ -36,7 +36,8 @@ lsp.ensure_installed({
     -- Replace these with whatever servers you want to install
     'tsserver',
     'eslint',
-    'clangd'
+    'clangd',
+    'gopls'
 })
 
 lsp.on_attach(function(client, bufnr)
