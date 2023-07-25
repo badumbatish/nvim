@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
 
+vim.cmd('filetype plugin on')
 
 require('configs')
 
