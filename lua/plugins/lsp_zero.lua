@@ -24,6 +24,7 @@ return {
 
         lsp.on_attach(function(client, bufnr)
             lsp.default_keymaps({ buffer = bufnr })
+            lsp.buffer_autoformat()
         end)
         -- Fix Undefined global 'vim'
         require("mason-lspconfig").setup {
@@ -32,6 +33,7 @@ return {
                 "rust_analyzer",
 
                 "pyright",
+                "ruff_lsp",
 
                 "clangd",
                 "cmake",
@@ -44,7 +46,6 @@ return {
             },
         }
         require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
-
         lsp.setup()
 
         local cmp = require("cmp")
