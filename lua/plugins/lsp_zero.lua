@@ -32,19 +32,24 @@ return {
                 "lua_ls",
                 "rust_analyzer",
 
-                "pyright",
-                "ruff_lsp",
+                "pylsp",
 
+                -- C, C++, CMAKE
                 "clangd",
                 "cmake",
 
 
-
+                -- GO, GOLANG
                 "golangci_lint_ls",
                 "gopls",
 
+
+
+                -- BASH SCRIPT
+                "bashls",
             },
         }
+
         require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
         lsp.setup()
 
