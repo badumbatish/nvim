@@ -24,7 +24,7 @@ keymap("n", "<S-h>", ":tabprevious<CR>", opts)
 
 keymap("n", "<leader>q", ":q<CR>", opts)
 
-
+keymap("n", "<S-j>", ":lua vim.lsp.buf.code_action()<CR>")
 local open_or_move_to_tab = function()
     local term = "terminal"
     if vim.fn.bufexists(term) == 1 then
