@@ -13,8 +13,8 @@ vim.opt.shiftwidth     = 4
 vim.opt.expandtab      = true
 vim.opt.incsearch      = true
 
-vim.opt.numberwidth    = 6
-vim.opt.signcolumn     = "yes"
+vim.opt.numberwidth    = 4
+vim.opt.signcolumn     = "yes:3"
 
 vim.opt.laststatus     = 3
 
