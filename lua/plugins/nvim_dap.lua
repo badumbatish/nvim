@@ -32,7 +32,7 @@ return {
 
 
         -- PYTHON DAP CONFIGURATION
-        dap.configurations.python            = {
+        dap.configurations.python = {
             {
                 -- The first three options are required by nvim-dap
                 type = 'python', -- the type here established the link to the adapter definition: `dap.adapters.python`
@@ -58,12 +58,12 @@ return {
             },
         }
 
-        dap.adapters.lldb                    = {
+        dap.adapters.lldb         = {
             type = 'executable',
             command = '/opt/homebrew/opt/llvm/bin/lldb-vscode', -- adjust as needed, must be absolute path
             name = 'lldb'
         }
-        dap.configurations.cpp               = {
+        dap.configurations.cpp    = {
             {
                 name = "Launch file",
                 type = "lldb",
@@ -75,28 +75,38 @@ return {
                 stopOnEntry = false,
             },
         }
-        dap.configurations.c                 = dap.configurations.cpp
-        dap.configurations.rust              = dap.configurations.cpp
+        dap.configurations.c      = dap.configurations.cpp
+        dap.configurations.rust   = {
+            {
+                name = "Launch file",
+                type = "lldb",
+                request = "launch",
+                program = function()
+                    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                end,
+                cwd = '${workspaceFolder}',
+                stopOnEntry = false,
+                initCommands = function()
+                    -- Find out where to look for the pretty printer Python module
+                    local rustc_sysroot = vim.fn.trim(vim.fn.system('rustc --print sysroot'))
 
-        dap.configurations.rust.initCommands = function()
-            -- Find out where to look for the pretty printer Python module
-            local rustc_sysroot = vim.fn.trim(vim.fn.system('rustc --print sysroot'))
+                    local script_import = 'command script import "' ..
+                    rustc_sysroot .. '/lib/rustlib/etc/lldb_lookup.py"'
+                    local commands_file = rustc_sysroot .. '/lib/rustlib/etc/lldb_commands'
 
-            local script_import = 'command script import "' ..
-                rustc_sysroot .. '/lib/rustlib/etc/lldb_lookup.py"'
-            local commands_file = rustc_sysroot .. '/lib/rustlib/etc/lldb_commands'
+                    local commands = {}
+                    local file = io.open(commands_file, 'r')
+                    if file then
+                        for line in file:lines() do
+                            table.insert(commands, line)
+                        end
+                        file:close()
+                    end
+                    table.insert(commands, 1, script_import)
 
-            local commands = {}
-            local file = io.open(commands_file, 'r')
-            if file then
-                for line in file:lines() do
-                    table.insert(commands, line)
-                end
-                file:close()
-            end
-            table.insert(commands, 1, script_import)
-
-            return commands
-        end
+                    return commands
+                end,
+            },
+        }
     end
 }
