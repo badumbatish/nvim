@@ -21,6 +21,7 @@ return {
             else
                 cb({
                     type = 'executable',
+                    -- CHANGE YOUR PYTHON PATH WHEN USING NEW SYSTEM
                     command = '/Users/jjsm/.virtualenvs/debugpy/bin/python3',
                     args = { '-m', 'debugpy.adapter' },
                     options = {
