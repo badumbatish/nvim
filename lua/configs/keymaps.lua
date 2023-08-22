@@ -41,7 +41,7 @@ vim.cmd("tnoremap <esc> <C-\\><C-N>")
 
 
 
-vim.keymap.set('n', '<Leader>6', function() require('dap').continue() end)
+vim.keymap.set('n', '<Leader>5', function() require('dap').continue() end)
 vim.keymap.set('n', '<Leader>6', function() require('dap').terminate() end)
 vim.keymap.set('n', '<Leader>7', function() require('dap').step_over() end)
 vim.keymap.set('n', '<Leader>8', function() require('dap').step_into() end)
